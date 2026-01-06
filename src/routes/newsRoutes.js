@@ -5,6 +5,7 @@ const {testingData} = require('../controllers/scrapping.controller');
 const router = express.Router();
 
 router.get("/scrape", getScraped);
-router.get("/testingwala",testingData );
+
+router.get("/testingwala", testingData);
 
 module.exports = router;

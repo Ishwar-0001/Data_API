@@ -7,6 +7,13 @@ exports.getScraped = async (req, res) => {
 };
 
 exports.testingData = async (req, res) => {
-  const data2 = await testing();
-  res.json(data2);
+  try {
+    const data = await scrapeJKSattaAllMonths();
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({
+      message: "Scraping failed",
+      error: error.message,
+    });
+  }
 };
