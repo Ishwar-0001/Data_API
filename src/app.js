@@ -21,7 +21,7 @@ app.use("/api/check", newsRoutes);
 
 /* ---------------- Test Route ---------------- */
 app.get("/", (req, res) => {
-  res.send("Web Scraping API is running 🚀");
+  res.send("Data api is running 🚀");
 });
 
 module.exports = app;
