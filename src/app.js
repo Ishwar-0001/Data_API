@@ -10,7 +10,7 @@ app.use(express.json());
 // ✅ Allow Vite frontend
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://frontend-weld-seven-a0rj6yqpp0.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
