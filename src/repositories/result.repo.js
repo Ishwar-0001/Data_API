@@ -1,5 +1,8 @@
 const GameResult = require("../models/result.model");
 
+/**
+ * Scraper bulk upsert (unchanged)
+ */
 async function saveResults(scrapeData) {
   const ops = scrapeData.results.map(r => ({
     updateOne: {
@@ -28,6 +31,29 @@ async function saveResults(scrapeData) {
   };
 }
 
+/**
+ * ✅ USER: Create or Update single result
+ * Only requires: gameId, date, resultNumber
+ */
+async function createOrUpdateResult({ gameId, date, resultNumber, site = "jksatta.com" }) {
+  return await GameResult.findOneAndUpdate(
+    { gameId, date, site },
+    {
+      $set: {
+        resultNumber,
+        scrapedAt: new Date()
+      }
+    },
+    {
+      upsert: true,
+      new: true
+    }
+  );
+}
+
+/**
+ * Get all results (pagination)
+ */
 async function getAllResults({ page = 1, limit = 50 }) {
   const skip = (page - 1) * limit;
 
@@ -44,5 +70,6 @@ async function getAllResults({ page = 1, limit = 50 }) {
 
 module.exports = {
   saveResults,
+  createOrUpdateResult,
   getAllResults
 };
