@@ -14,7 +14,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",            
-      "https://frontend-weld-seven-a0rj6yqpp0.vercel.app"  
+      "https://frontend-zeta-gold-83.vercel.app/"  
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"]
