@@ -33,7 +33,7 @@ const resultRoutes = require("./routes/result.routes");
 const app = express();
 
 app.use(express.json());
-app.use("/api", scrapeRoutes);
+app.use("/api/scrape", scrapeRoutes);
 app.use("/api/results", resultRoutes);
 
 module.exports = app;

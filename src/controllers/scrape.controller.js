@@ -1,20 +1,22 @@
-const scrapeService = require("../services/scraper.service");
+const { scrapeJKSattaAllMonths } = require("../services/scraper.service");
 const { saveResults } = require("../repositories/result.repo");
 
-async function scrapeController(req, res) {
+async function scrape(req, res) {
   try {
-    const data = await scrapeService(process.env.SCRAPE_START_YEAR);
-    const db = await saveResults(data);
+    const startYear = Number(req.query.startYear || 2026);
+
+    const scrapeData = await scrapeJKSattaAllMonths(startYear);
+    const dbResult = await saveResults(scrapeData);
 
     res.json({
       status: "success",
-      scraped: data.totalResults,
-      database: db
+      ...dbResult
     });
+
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Scraping failed" });
+    res.status(500).json({ error: err.message });
   }
 }
 
-module.exports = scrapeController;
+module.exports = { scrape };
