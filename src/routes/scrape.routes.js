@@ -1,8 +1,8 @@
 const express = require("express");
-const { scrape } = require("../controllers/scrape.controller");
+const { scrapeController } = require("../controllers/scrape.controller");
 
 const router = express.Router();
 
-router.post("/", scrape);
+router.post("/", scrapeController);
 
 module.exports = router;

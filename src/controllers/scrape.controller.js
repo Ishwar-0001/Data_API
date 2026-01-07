@@ -1,11 +1,11 @@
 const { scrapeJKSattaAllMonths } = require("../services/scraper.service");
 const { saveResults } = require("../repositories/result.repo");
 
-async function scrape(req, res) {
+async function scrapeController(req, res) {
   try {
-    const startYear = Number(req.query.startYear || 2026);
+    const year = Number(req.query.startYear || 2026);
 
-    const scrapeData = await scrapeJKSattaAllMonths(startYear);
+    const scrapeData = await scrapeJKSattaAllMonths(year);
     const dbResult = await saveResults(scrapeData);
 
     res.json({
@@ -19,4 +19,4 @@ async function scrape(req, res) {
   }
 }
 
-module.exports = { scrape };
+module.exports = { scrapeController };
